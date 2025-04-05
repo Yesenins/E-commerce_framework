@@ -23,7 +23,7 @@ public class WebDriverFactory {
     private static ChromeDriver createChromeDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-maximize", "disable-gpu", "--incognito");
+        options.addArguments("--start-maximized", "disable-gpu", "--incognito");
 //        options.addArguments("--headless", "disable-gpu", "--incognito");
         return new ChromeDriver(options);
     }
@@ -31,7 +31,7 @@ public class WebDriverFactory {
     private static FirefoxDriver createFireFoxDriver() {
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--window-size=1920,1080", "disable-gpu", "--incognito");
+        options.addArguments("--start-maximized", "disable-gpu", "--incognito");
 //        options.addArguments("--headless", "disable-gpu", "--incognito");
         return new FirefoxDriver(options);
     }
