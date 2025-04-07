@@ -2,6 +2,7 @@ package elements;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.WaitUtils;
@@ -19,20 +20,32 @@ public class BaseElement {
     }
 
     public String getText() {
-        return driver.findElement(By.xpath(String.format(locator))).getText();
+        return driver.findElement(By.xpath(locator)).getText();
     }
 
     public void clickOn() {
         log.info("click on element --> " + nameElement);
-        WaitUtils.waitForElementToBeClickable(driver,locator);
+        WaitUtils.waitForElementToBeClickable(driver,getLocator());
         getElement().click();
+    }
+
+    public WebElement getElement() {
+        return driver.findElement(By.xpath(locator));
+    }
+
+    public WebElement getElementWithLabel(String label) {
+        return driver.findElement(By.xpath(String.format(locator,label)));
     }
 
     public boolean isVisible() {
         return getElement().isDisplayed();
     }
 
-    public WebElement getElement() {
-        return driver.findElement(By.xpath(String.format(locator)));
+    public By getLocator() {
+        return By.xpath(locator);
+    }
+
+    public By getLocatorWithLabel(String label) {
+        return By.xpath(String.format(locator,label));
     }
 }

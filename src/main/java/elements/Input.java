@@ -19,14 +19,16 @@ public class Input extends BaseElement {
     }
 
     public Input writeText(String text) {
-        WaitUtils.waitForElementToBeVisible(driver,getElement());
+        WaitUtils.waitForElementToBeVisible(driver,getLocator());
+        getElement().clear();
         getElement().sendKeys(text);
+        getElement().sendKeys(Keys.TAB);
         return this;
     }
 
     public Input writeText(String label, String text) {
-        WaitUtils.waitForElementToBeVisible(driver,locator,label);
-        driver.findElement(By.xpath(String.format(locator,label))).sendKeys(text);
+        WaitUtils.waitForElementToBeVisible(driver,getLocatorWithLabel(label));
+        getElementWithLabel(label).sendKeys(text);
         return this;
     }
 }
