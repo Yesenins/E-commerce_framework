@@ -1,9 +1,7 @@
 package elements;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import utils.WaitUtils;
 
 public class Input extends BaseElement {
@@ -27,7 +25,7 @@ public class Input extends BaseElement {
     }
 
     public Input writeText(String label, String text) {
-        WaitUtils.waitForElementToBeVisible(driver,getLocatorWithLabel(label));
+        WaitUtils.waitForElementToBeVisible(driver, getLocatorWithLabel(label));
         getElementWithLabel(label).sendKeys(text);
         return this;
     }

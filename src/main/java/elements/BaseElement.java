@@ -5,7 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import utils.WaitUtils;
+
+import java.time.Duration;
 
 @Log4j2
 public class BaseElement {
@@ -27,6 +30,12 @@ public class BaseElement {
         log.info("click on element --> " + nameElement);
         WaitUtils.waitForElementToBeClickable(driver,getLocator());
         getElement().click();
+    }
+    public void actionClickOn() {
+        log.info("click on element with action --> " + nameElement);
+        WaitUtils.waitForElementToBeClickable(driver,getLocator());
+        Actions actions = new Actions(driver, Duration.ofSeconds(10));
+        actions.moveToElement(getElement()).pause(Duration.ofSeconds(1)).click().perform();
     }
 
     public WebElement getElement() {

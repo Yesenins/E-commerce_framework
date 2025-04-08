@@ -11,7 +11,6 @@ public class PasswordModalPage extends LoginModalPage {
 
     protected final Input passwordInput = new Input("//input[@name=\"password\"]","passwordInput",driver);
     protected final Button passwordEnterButton = new Button("(//*[@aria-label=\"Войти\"])[2]","enterButton",driver);
-//    protected final Button passwordEnterButton = new Button("//*[@class=\"_footer_q2ixp_42\"]//*[@aria-label=\"Войти\"]","enterButton",driver);
 
     public PasswordModalPage(WebDriver driver) {
         super(driver);
@@ -20,7 +19,6 @@ public class PasswordModalPage extends LoginModalPage {
     @Override
     public PasswordModalPage isPageOpened() {
         WaitUtils.waitForPageLoaded(driver);
-//        WaitUtils.waitForElementToBeClickable(driver, passwordInput.getElement());
         return this;
     }
 

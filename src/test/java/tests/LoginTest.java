@@ -1,6 +1,5 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
@@ -9,7 +8,7 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "")
     public void successLoginTest() {
-        loginSteps.login(PropertyReader.getProperty("email"),PropertyReader.getProperty("password"));
+        loginSteps.login(PropertyReader.getProperty(EMAIL),PropertyReader.getProperty(PASSWORD));
     }
 
     @Test(description = "")

@@ -1,10 +1,8 @@
 package steps;
 
 import io.qameta.allure.Step;
-import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import pages.HomePage;
 
 public class LoginSteps extends BaseSteps {
 
@@ -47,7 +45,7 @@ public class LoginSteps extends BaseSteps {
 
     @Step("error message output check")
     public LoginSteps checkErrorMessageOutput(String errorMessage) {
-        Assert.assertEquals(loginModalPage.getErrorMessageText(), errorMessage);
+        Assert.assertEquals(loginModalPage.getLoginFieldErrorMessage(), errorMessage);
         return this;
     }
 }
