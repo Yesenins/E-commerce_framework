@@ -1,8 +1,10 @@
 package pages;
 
+import constants.IConstants;
 import org.openqa.selenium.WebDriver;
 
-public abstract class BasePage {
+public abstract class BasePage implements IConstants {
+
     public WebDriver driver;
 
     public BasePage(WebDriver driver) {
