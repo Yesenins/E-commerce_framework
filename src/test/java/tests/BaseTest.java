@@ -14,6 +14,8 @@ import pages.modals.LoginModalPage;
 import pages.modals.PasswordModalPage;
 import pages.modals.RegistrationModalPage;
 import steps.LoginSteps;
+import steps.RegistrationSteps;
+
 @Data
 public class BaseTest implements IConstants {
     WebDriver driver;
@@ -24,6 +26,7 @@ public class BaseTest implements IConstants {
     HomePage homePage;
     ShoppingCartPage shoppingCartPage;
     LoginSteps loginSteps;
+    RegistrationSteps registrationSteps;
 
     @BeforeMethod
     public void setUpDriver() {
@@ -39,6 +42,7 @@ public class BaseTest implements IConstants {
         homePage = new HomePage(driver);
         shoppingCartPage = new ShoppingCartPage(driver);
         loginSteps = new LoginSteps(driver);
+        registrationSteps = new RegistrationSteps(driver);
     }
 
     @AfterMethod
