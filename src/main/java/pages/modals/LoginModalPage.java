@@ -55,4 +55,10 @@ public class LoginModalPage extends HeaderPage {
             return "";
         }
     }
+
+    public RegistrationModalPage goToRegistration() {
+        WaitUtils.waitForElementToBeVisible(driver, registrationButton.getLocator());
+        registrationButton.clickOn();
+        return new RegistrationModalPage(driver);
+    }
 }

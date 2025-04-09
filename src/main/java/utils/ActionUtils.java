@@ -2,6 +2,7 @@ package utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
@@ -16,5 +17,10 @@ public class ActionUtils {
         By elementMenuLocator = By.xpath(String.format(locatorMenu,menuLabel));
         WaitUtils.waitForElementToBeClickable(driver,elementMenuLocator);
         driver.findElement(elementMenuLocator).click();
+    }
+
+    public static void fillInputForm(WebDriver driver, WebElement element) {
+        Actions actions = new Actions(driver, Duration.ofSeconds(5));
+        actions.moveToElement(element).click().pause(Duration.ofSeconds(1)).perform();
     }
 }

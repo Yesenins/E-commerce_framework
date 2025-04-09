@@ -27,12 +27,12 @@ public class BaseElement {
     }
 
     public void clickOn() {
-        log.info("click on element --> " + nameElement);
+        log.info("click on element --> {}",nameElement);
         WaitUtils.waitForElementToBeClickable(driver,getLocator());
         getElement().click();
     }
     public void actionClickOn() {
-        log.info("click on element with action --> " + nameElement);
+        log.info("click on element with action --> {} ", nameElement);
         WaitUtils.waitForElementToBeClickable(driver,getLocator());
         Actions actions = new Actions(driver, Duration.ofSeconds(10));
         actions.moveToElement(getElement()).pause(Duration.ofSeconds(1)).click().perform();
