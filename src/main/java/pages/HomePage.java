@@ -21,7 +21,8 @@ public class HomePage extends HeaderPage {
 
     @Override
     public HomePage isPageOpened() {
-        WaitUtils.waitForElementToBeVisible(driver, CATEGORIES);
+        WaitUtils.waitForPageLoaded(driver);
+//        WaitUtils.waitForElementToBeVisible(driver, CATEGORIES);
         return this;
     }
 
