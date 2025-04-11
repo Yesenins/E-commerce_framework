@@ -9,18 +9,32 @@ import java.time.Duration;
 
 public class ActionUtils {
 
-    public static void goToAndClickElement(String locator, String locatorLabel, String locatorMenu, String menuLabel, WebDriver driver) {
-        Actions actions = new Actions(driver, Duration.ofSeconds(10));
-        By elementLocator = By.xpath(String.format(locator,locatorLabel));
-        WaitUtils.waitForElementToBeVisible(driver,elementLocator);
-        actions.moveToElement(driver.findElement(elementLocator)).perform();
-        By elementMenuLocator = By.xpath(String.format(locatorMenu,menuLabel));
-        WaitUtils.waitForElementToBeClickable(driver,elementMenuLocator);
-        driver.findElement(elementMenuLocator).click();
+    public static void hoverClickElement(By elementLocator, By elementMenuLocator, WebDriver driver) {
+        ActionUtils actionUtils = new ActionUtils();
+        actionUtils.goToElement(elementLocator, driver);
+        actionUtils.goToElementAndClick(elementMenuLocator, driver);
+    }
+
+    public static void dropdownClickElement(By elementLocator, By elementMenuLocator, WebDriver driver) {
+        ActionUtils actionUtils = new ActionUtils();
+        actionUtils.goToElementAndClick(elementLocator, driver);
+        actionUtils.goToElementAndClick(elementMenuLocator, driver);
     }
 
     public static void fillInputForm(WebDriver driver, WebElement element) {
         Actions actions = new Actions(driver, Duration.ofSeconds(5));
         actions.moveToElement(element).click().pause(Duration.ofSeconds(1)).perform();
+    }
+
+    private void goToElement(By elementLocator, WebDriver driver) {
+        Actions actions = new Actions(driver, Duration.ofSeconds(10));
+        WaitUtils.waitForElementToBeVisible(driver,elementLocator);
+        actions.moveToElement(driver.findElement(elementLocator)).pause(Duration.ofSeconds(1)).perform();
+    }
+
+    private void goToElementAndClick(By elementMenuLocator, WebDriver driver) {
+        Actions actions = new Actions(driver, Duration.ofSeconds(10));
+        WaitUtils.waitForElementToBeClickable(driver,elementMenuLocator);
+        actions.moveToElement(driver.findElement(elementMenuLocator)).click().perform();
     }
 }
