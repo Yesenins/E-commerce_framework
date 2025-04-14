@@ -1,10 +1,8 @@
 package elements;
 
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import utils.WaitUtils;
 @Log4j2
 public class Input extends BaseElement {
@@ -34,7 +32,7 @@ public class Input extends BaseElement {
     }
 
     public Input writeTextInSearchField(String text) {
-        WaitUtils.waitForElementToBeVisible(driver,getLocator());
+        WaitUtils.waitForElementToBeVisible(driver, getLocator());
         log.info("Fill in the field: {} with the value: {}", nameElement, text);
         getElement().clear();
         getElement().sendKeys(text);

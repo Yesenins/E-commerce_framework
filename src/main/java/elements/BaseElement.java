@@ -1,10 +1,7 @@
 package elements;
 
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import utils.WaitUtils;
 
@@ -27,13 +24,14 @@ public class BaseElement {
     }
 
     public void clickOn() {
-        log.info("click on element --> {}",nameElement);
-        WaitUtils.waitForElementToBeClickable(driver,getLocator());
+        log.info("click on element --> {}", nameElement);
+        WaitUtils.waitForElementToBeClickable(driver, getLocator());
         getElement().click();
     }
+
     public void actionClickOn() {
         log.info("click on element with action --> {} ", nameElement);
-        WaitUtils.waitForElementToBeClickable(driver,getLocator());
+        WaitUtils.waitForElementToBeClickable(driver, getLocator());
         Actions actions = new Actions(driver, Duration.ofSeconds(10));
         actions.moveToElement(getElement()).pause(Duration.ofSeconds(1)).click().perform();
     }
@@ -43,7 +41,7 @@ public class BaseElement {
     }
 
     public WebElement getElementWithLabel(String label) {
-        return driver.findElement(By.xpath(String.format(locator,label)));
+        return driver.findElement(By.xpath(String.format(locator, label)));
     }
 
     public boolean isVisible() {
@@ -55,6 +53,6 @@ public class BaseElement {
     }
 
     public By getLocatorWithLabel(String label) {
-        return By.xpath(String.format(locator,label));
+        return By.xpath(String.format(locator, label));
     }
 }
