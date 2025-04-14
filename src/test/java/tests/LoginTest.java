@@ -8,7 +8,7 @@ public class LoginTest extends BaseTest {
 
     @Test(description = "")
     public void successLoginTest() {
-        loginSteps.login(PropertyReader.getProperty(EMAIL),PropertyReader.getProperty(PASSWORD));
+        loginSteps.loginAndCheckPageIsOpened(PropertyReader.getProperty(EMAIL),PropertyReader.getProperty(PASSWORD));
     }
 
     @Test(description = "")

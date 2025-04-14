@@ -15,7 +15,7 @@ public class LoginSteps extends BaseSteps {
     public LoginSteps emailEntry(String email) {
         homePage.openPage();
         headerPage.goToLogin()
-                .isPageOpened()
+                .isPageLoaded()
                 .fillEmailForm(email);
         return this;
     }
@@ -24,23 +24,23 @@ public class LoginSteps extends BaseSteps {
     public LoginSteps passwordEntry(String email, String password) {
         homePage.openPage();
         headerPage.goToLogin()
-                .isPageOpened()
+                .isPageLoaded()
                 .emailEntry(email)
-                .isPageOpened()
+                .isPageLoaded()
                 .passwordEntry(password);
         return this;
     }
 
     @Step
-    public LoginSteps login(String email, String password) {
+    public LoginSteps loginAndCheckPageIsOpened(String email, String password) {
         homePage.openPage();
         headerPage.goToLogin()
-                .isPageOpened()
+                .isPageLoaded()
                 .emailEntry(email)
-                .isPageOpened()
+                .isPageLoaded()
                 .fillPasswordForm(password)
                 .closeModal()
-                .isPageOpenedAfterLogin();
+                .isPageLoadedAfterLogin();
         return this;
     }
 

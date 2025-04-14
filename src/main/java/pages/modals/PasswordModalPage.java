@@ -3,7 +3,6 @@ package pages.modals;
 import elements.Button;
 import elements.Input;
 import org.openqa.selenium.WebDriver;
-import pages.BasePage;
 import pages.HomePage;
 import utils.WaitUtils;
 
@@ -17,14 +16,14 @@ public class PasswordModalPage extends LoginModalPage {
     }
 
     @Override
-    public PasswordModalPage isPageOpened() {
+    public PasswordModalPage isPageLoaded() {
         WaitUtils.waitForPageLoaded(driver);
         return this;
     }
 
     public HomePage fillPasswordForm(String password) {
         passwordInput.writeText(password);
-        WaitUtils.customWait(driver,enterButton.getLocator());
+        WaitUtils.customWait(driver, enterButton.getLocator());
         passwordEnterButton.clickOn();
         return new HomePage(driver);
     }

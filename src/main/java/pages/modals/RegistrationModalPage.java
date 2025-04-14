@@ -7,12 +7,10 @@ import lombok.extern.log4j.Log4j2;
 import objects.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import pages.HomePage;
 import utils.ActionUtils;
 import utils.WaitUtils;
 
-import java.time.Duration;
 @Log4j2
 public class RegistrationModalPage extends LoginModalPage {
 
@@ -24,30 +22,25 @@ public class RegistrationModalPage extends LoginModalPage {
         super(driver);
     }
 
-    public RegistrationModalPage isPageOpened() {
-        WaitUtils.waitForElementToBeVisible(driver,loginButton.getLocator());
+    public RegistrationModalPage isPageLoaded() {
+        WaitUtils.waitForElementToBeVisible(driver, loginButton.getLocator());
         return this;
     }
 
     public RegistrationModalPage fillRegistrationForm(User user) {
-        Input nameInput = new Input(REGISTRATION_INPUTS,"nameInput", driver);
-        ActionUtils.fillInputForm(driver,nameInput.getElementWithLabel("имя"));
-        nameInput.writeText("имя",user.getName());
-
-        Input emailInput = new Input(REGISTRATION_INPUTS,"emailInput", driver);
-        ActionUtils.fillInputForm(driver,emailInput.getElementWithLabel("Введите свой email"));
-        nameInput.writeText("Введите свой email",user.getEmail());
-
-        Input passwordInput = new Input(REGISTRATION_INPUTS,"passwordInput", driver);
-        ActionUtils.fillInputForm(driver,passwordInput.getElementWithLabel("Придумайте пароль"));
-        passwordInput.writeText("Придумайте пароль",user.getPassword());
-
-        Input replyPasswordInput = new Input(REGISTRATION_INPUTS,"replyPasswordInput", driver);
-        ActionUtils.fillInputForm(driver,replyPasswordInput.getElementWithLabel("Повторите пароль"));
-        passwordInput.writeText("Повторите пароль",user.getReplyPassword());
+        fillField("имя", user.getName());
+        fillField("Введите свой email", user.getEmail());
+        fillField("Придумайте пароль", user.getPassword());
+        fillField("Повторите пароль", user.getReplyPassword());
 
         checkboxRegistration.clickOn();
         return this;
+    }
+
+    private void fillField(String label, String value) {
+        Input input = new Input(REGISTRATION_INPUTS,"input", driver);
+        ActionUtils.fillInputForm(driver, input.getElementWithLabel(label));
+        input.writeText(label, value);
     }
 
     public HomePage registration(User user) {
@@ -66,13 +59,4 @@ public class RegistrationModalPage extends LoginModalPage {
             return "";
         }
     }
-
-//    public RegistrationModalPage fillRegistrationForm(User user) {
-//        new Input(REGISTRATION_INPUTS,"nameInput", driver).writeText("имя",user.getName());
-//        new Input(REGISTRATION_INPUTS,"emailInput", driver).writeText("Введите свой email",user.getEmail());
-//        new Input(REGISTRATION_INPUTS,"passwordInput", driver).writeText("Придумайте пароль",user.getPassword());
-//        new Input(REGISTRATION_INPUTS,"passwordInput", driver).writeText("Повторите пароль",user.getPassword());
-//        checkboxRegistration.clickOn();
-//        return this;
-//    }
 }

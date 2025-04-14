@@ -8,7 +8,7 @@ import utils.WaitUtils;
 public class HomePage extends HeaderPage {
 
     protected final Button superButton = new Button("//button[normalize-space()='Супер!']", "super",driver);
-
+    protected final String MODAL = "//div[@id=\"modals\"]";
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -20,19 +20,18 @@ public class HomePage extends HeaderPage {
     }
 
     @Override
-    public HomePage isPageOpened() {
+    public HomePage isPageLoaded() {
         WaitUtils.waitForPageLoaded(driver);
-//        WaitUtils.waitForElementToBeVisible(driver, CATEGORIES);
         return this;
     }
 
-    public HomePage isPageOpenedAfterLogin() {
+    public HomePage isPageLoadedAfterLogin() {
         WaitUtils.waitForElementToBeVisible(driver, profileHover.getLocatorWithLabel("Профиль"));
         return this;
     }
 
     public HomePage closeModal() {
-        WaitUtils.waitForElementToBeVisible(driver, By.xpath("//div[@id=\"modals\"]"));
+        WaitUtils.waitForElementToBeVisible(driver, By.xpath(MODAL));
         superButton.clickOn();
         return this;
     }
