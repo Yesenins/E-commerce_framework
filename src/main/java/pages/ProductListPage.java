@@ -10,6 +10,8 @@ import utils.WaitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 @Log4j2
 public class ProductListPage extends HeaderPage {
 
@@ -22,7 +24,7 @@ public class ProductListPage extends HeaderPage {
     }
 
     @Override
-    public ProductListPage isPageOpened() {
+    public ProductListPage isPageLoaded() {
         WaitUtils.waitForPageLoaded(driver);
         WaitUtils.waitForElementToBeVisible(driver, By.xpath(BRAND_NAME));
         return this;
@@ -38,6 +40,14 @@ public class ProductListPage extends HeaderPage {
         return new ProductPage(driver);
     }
 
+    public ProductPage goToProductRandom() {
+        Random random = new Random();
+        int item = random.nextInt(1, 25);
+        Button product = new Button(PRODUCT, "product", driver);
+        product.getElementWithLabel(item + "").click();
+        return new ProductPage(driver);
+    }
+
     public List<String> getProductNames(String locator) {
         List<WebElement> list = driver.findElements(By.xpath(locator));
         List<String> names = new ArrayList<>();
@@ -48,7 +58,7 @@ public class ProductListPage extends HeaderPage {
     }
 
     public ProductListPage filter(String label, String subMenuLabel) {
-        WaitUtils.waitForElementToBeClickable(driver,filter.getLocatorWithLabel(label));
+        WaitUtils.waitForElementToBeClickable(driver, filter.getLocatorWithLabel(label));
         filter.selectFromDropdown(label, DROPDOWN_SUB_MENU, subMenuLabel);
         applyButton.clickOn();
         return this;

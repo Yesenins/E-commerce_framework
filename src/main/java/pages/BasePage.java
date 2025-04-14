@@ -12,5 +12,5 @@ public abstract class BasePage implements IConstants {
     }
 
     public abstract BasePage openPage();
-    public abstract BasePage isPageOpened();
+    public abstract BasePage isPageLoaded();
 }

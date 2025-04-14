@@ -26,7 +26,7 @@ public class LoginModalPage extends HeaderPage {
     }
 
     @Override
-    public LoginModalPage isPageOpened() {
+    public LoginModalPage isPageLoaded() {
         WaitUtils.waitForPageLoaded(driver);
         WaitUtils.waitForElementToBeVisible(driver, MODAL_LOCATOR);
         WaitUtils.waitForElementToBeClickable(driver, registrationButton.getLocator());
@@ -40,7 +40,7 @@ public class LoginModalPage extends HeaderPage {
 
     public PasswordModalPage emailEntry(String email) {
         fillEmailForm(email);
-        WaitUtils.customWait(driver,enterButton.getLocator());
+        WaitUtils.customWait(driver, enterButton.getLocator());
         enterButton.actionClickOn();
         return new PasswordModalPage(driver);
     }
