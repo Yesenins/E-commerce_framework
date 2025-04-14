@@ -17,7 +17,7 @@ public class SearchSteps extends BaseSteps {
     public SearchSteps openPage() {
         homePage
                 .openPage()
-                .isPageOpened();
+                .isPageLoaded();
         return this;
     }
     @Step
@@ -30,7 +30,7 @@ public class SearchSteps extends BaseSteps {
     public SearchSteps searchProduct(String productName) {
         headerPage
                 .searchTextInput(productName)
-                .isPageOpened();
+                .isPageLoaded();
         return this;
     }
 
@@ -46,7 +46,7 @@ public class SearchSteps extends BaseSteps {
 
     @Step
     public SearchSteps checkProductIsDisplayedInTheSearchResult(String brand, String product) {
-        productListPage.isPageOpened();
+        productListPage.isPageLoaded();
         List<String> list = productListPage.getProductNames(PRODUCT_NAME);
         boolean flag = false;
         for(String item : list) {
@@ -69,8 +69,8 @@ public class SearchSteps extends BaseSteps {
     @Step
     public SearchSteps goToHoverMenu(String locatorLabel, String menuLabel) {
         headerPage
-                .goToHoverMenu(SECTION_BUTTONS, locatorLabel, HOVER_SUB_SECTIONS_BUTTON, menuLabel)
-                .isPageOpened();
+                .goToHoverMenu(locatorLabel, menuLabel)
+                .isPageLoaded();
         return this;
     }
 
@@ -89,7 +89,7 @@ public class SearchSteps extends BaseSteps {
             List<WebElement> products = productListPage.getProductList();
             WebElement item = products.get(i);
             item.click();
-            productPage.isPageOpened();
+            productPage.isPageLoaded();
             String text = driver.findElement(By.xpath(String.format(PRODUCT_DESCRIPTION_ABOUT_THE_PRODUCT,label))).getText();
             Assert.assertEquals(text, expectedResult);
             driver.navigate().back();

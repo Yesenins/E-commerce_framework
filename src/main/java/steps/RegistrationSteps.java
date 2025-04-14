@@ -4,9 +4,6 @@ import io.qameta.allure.Step;
 import objects.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import pages.modals.RegistrationModalPage;
-
-import static constants.IConstants.*;
 
 public class RegistrationSteps extends BaseSteps {
 
@@ -15,30 +12,29 @@ public class RegistrationSteps extends BaseSteps {
     }
 
     @Step
-    public RegistrationSteps registration(User user) {
-        homePage.openPage();
-        headerPage.goToLogin()
+    public RegistrationSteps registerAndCheckPageIsOpened(User user) {
+        homePage
+                .openPage();
+        headerPage
+                .goToLogin()
                 .goToRegistration()
                 .registration(user)
                 .closeModal()
-                .isPageOpenedAfterLogin();
+                .isPageLoadedAfterLogin();
         return this;
     }
 
     @Step
     public RegistrationSteps fillRegistrationForm(User user) {
-        homePage.openPage();
-        headerPage.goToLogin()
+        homePage
+                .openPage();
+        headerPage
+                .goToLogin()
                 .goToRegistration()
+                .isPageLoaded()
                 .fillRegistrationForm(user);
         return this;
     }
-
-//    @Step("error message output check")
-//    public RegistrationSteps checkErrorMessageOutput(String label, String errorMessage) {
-//        Assert.assertEquals(registrationModalPage.getRegistrationFieldErrorMessage(label), errorMessage);
-//        return this;
-//    }
 
     @Step("error message output check")
     public RegistrationSteps checkErrorMessageOutput(String errorMessage) {

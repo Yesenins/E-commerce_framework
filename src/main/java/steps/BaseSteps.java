@@ -6,6 +6,7 @@ import pages.*;
 import pages.modals.LoginModalPage;
 import pages.modals.PasswordModalPage;
 import pages.modals.RegistrationModalPage;
+import pages.modals.ShoppingCartModalPage;
 
 public class BaseSteps implements IConstants {
     WebDriver driver;
@@ -17,6 +18,7 @@ public class BaseSteps implements IConstants {
     ShoppingCartPage shoppingCartPage;
     ProductListPage productListPage;
     ProductPage productPage;
+    ShoppingCartModalPage shoppingCartModalPage;
 
     public BaseSteps (WebDriver driver) {
         this.driver = driver;
@@ -28,6 +30,6 @@ public class BaseSteps implements IConstants {
         shoppingCartPage = new ShoppingCartPage(driver);
         productListPage = new ProductListPage(driver);
         productPage = new ProductPage(driver);
-
+        shoppingCartModalPage = new ShoppingCartModalPage(driver);
     }
 }
