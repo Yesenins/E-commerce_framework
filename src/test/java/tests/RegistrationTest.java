@@ -12,7 +12,7 @@ public class RegistrationTest extends BaseTest {
                 .email("sdfsd@asd.com")
                 .password("sdfsdfsd")
                 .build();
-        registrationSteps.registration(user);
+        registrationSteps.registerAndCheckPageIsOpened(user);
     }
 
     @Test
@@ -23,7 +23,8 @@ public class RegistrationTest extends BaseTest {
                 .password("sdf")
                 .replyPassword("s")
                 .build();
-        registrationSteps.fillRegistrationForm(user)
+        registrationSteps
+                .fillRegistrationForm(user)
                 .checkErrorMessageOutput(NAME_ERROR_MESSAGE)
                 .checkErrorMessageOutput(EMAIL_ERROR_MESSAGE)
                 .checkErrorMessageOutput(PASSWORD_ERROR_MESSAGE);
@@ -37,7 +38,8 @@ public class RegistrationTest extends BaseTest {
                 .password("sdf123hdfhb")
                 .replyPassword("ssdf2sxff")
                 .build();
-        registrationSteps.fillRegistrationForm(user)
+        registrationSteps
+                .fillRegistrationForm(user)
                 .checkErrorMessageOutput(REPLAY_PASSWORD_ERROR_MESSAGE);
     }
 }
