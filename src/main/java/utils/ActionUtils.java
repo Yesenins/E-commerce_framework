@@ -28,13 +28,13 @@ public class ActionUtils {
 
     private void goToElement(By elementLocator, WebDriver driver) {
         Actions actions = new Actions(driver, Duration.ofSeconds(10));
-        WaitUtils.waitForElementToBeVisible(driver,elementLocator);
+        WaitUtils.waitForElementToBeVisible(driver, elementLocator);
         actions.moveToElement(driver.findElement(elementLocator)).pause(Duration.ofSeconds(1)).perform();
     }
 
     private void goToElementAndClick(By elementMenuLocator, WebDriver driver) {
         Actions actions = new Actions(driver, Duration.ofSeconds(10));
-        WaitUtils.waitForElementToBeClickable(driver,elementMenuLocator);
+        WaitUtils.waitForElementToBeClickable(driver, elementMenuLocator);
         actions.moveToElement(driver.findElement(elementMenuLocator)).click().perform();
     }
 }
