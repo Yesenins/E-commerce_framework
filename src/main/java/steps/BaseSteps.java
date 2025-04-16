@@ -19,6 +19,7 @@ public class BaseSteps implements IConstants {
     ProductListPage productListPage;
     ProductPage productPage;
     ShoppingCartModalPage shoppingCartModalPage;
+    FavoritesPage favoritesPage;
 
     public BaseSteps (WebDriver driver) {
         this.driver = driver;
@@ -31,5 +32,6 @@ public class BaseSteps implements IConstants {
         productListPage = new ProductListPage(driver);
         productPage = new ProductPage(driver);
         shoppingCartModalPage = new ShoppingCartModalPage(driver);
+        favoritesPage = new FavoritesPage(driver);
     }
 }
