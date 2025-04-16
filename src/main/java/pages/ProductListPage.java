@@ -3,9 +3,7 @@ package pages;
 import elements.Button;
 import elements.Dropdown;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import utils.WaitUtils;
 
 import java.util.ArrayList;
@@ -40,12 +38,31 @@ public class ProductListPage extends HeaderPage {
         return new ProductPage(driver);
     }
 
-    public ProductPage goToProductRandom() {
+    public void goToProductWithRandom(String locator) {
         Random random = new Random();
         int item = random.nextInt(1, 25);
-        Button product = new Button(PRODUCT, "product", driver);
-        product.getElementWithLabel(item + "").click();
+        String number = Integer.toString(item);
+        Button product = new Button(locator, "product", driver);
+        try {
+            WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
+            product.getElementWithLabel(item + "").click();
+        } catch (ElementClickInterceptedException e) {
+            log.info("JS scroll: {} ", e.getMessage());
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", product.getElementWithLabel(number));
+            WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
+            log.info("click on : {} ", product);
+            product.getElementWithLabel(item + "").click();
+        }
+    }
+
+    public ProductPage goToProductRandom() {
+        goToProductWithRandom(PRODUCT);
         return new ProductPage(driver);
+    }
+
+    public ProductListPage goToFavoritesRandom() {
+        goToProductWithRandom(FAVORITES);
+        return this;
     }
 
     public List<String> getProductNames(String locator) {

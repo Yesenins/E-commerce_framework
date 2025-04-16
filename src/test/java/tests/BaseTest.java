@@ -7,10 +7,7 @@ import lombok.Data;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import steps.LoginSteps;
-import steps.RegistrationSteps;
-import steps.SearchSteps;
-import steps.ShoppingCartSteps;
+import steps.*;
 
 @Data
 public class BaseTest implements IConstants {
@@ -19,6 +16,7 @@ public class BaseTest implements IConstants {
     RegistrationSteps registrationSteps;
     SearchSteps searchSteps;
     ShoppingCartSteps shoppingCartSteps;
+    FavoritesSteps favoritesSteps;
 
     @BeforeMethod
     public void setUpDriver() {
@@ -31,6 +29,7 @@ public class BaseTest implements IConstants {
         registrationSteps = new RegistrationSteps(driver);
         searchSteps = new SearchSteps(driver);
         shoppingCartSteps = new ShoppingCartSteps(driver);
+        favoritesSteps = new FavoritesSteps(driver);
     }
 
     @AfterMethod

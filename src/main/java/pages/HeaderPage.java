@@ -22,6 +22,7 @@ public class HeaderPage extends BasePage {
     protected final Input searchField = new Input("//input[@type=\"text\"]", "searchField", driver);
     protected final Button genderButton = new Button("//*[@data-genders='%s']", "genderButton", driver);
     protected final Button shoppingCartButton = new Button("//*[@href=\"/checkout/cart/\"]", "shoppingCartButton", driver);
+    protected final Button favoritesButton = new Button("//a[normalize-space()='Избранное']", "favorites", driver);
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -86,6 +87,11 @@ public class HeaderPage extends BasePage {
     public ShoppingCartPage goToShoppingCartPage() {
         shoppingCartButton.clickOn();
         return new ShoppingCartPage(driver);
+    }
+
+    public FavoritesPage goToFavoritesPage() {
+        favoritesButton.clickOn();
+        return new FavoritesPage(driver);
     }
 
 }
