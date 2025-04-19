@@ -40,40 +40,40 @@ public class ProductListPage extends HeaderPage {
         return new ProductPage(driver);
     }
 
-    protected void goToProductWithRandom(String locator, int item) {
+    protected void goToProductWithName(String locator, int item) {
         String number = Integer.toString(item);
         Button product = new Button(locator, "product", driver);
-        try {
-            JSUtils.jsScroll(driver, product.getLocatorWithLabel(number));
-            log.info("JS scroll");
-            WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
-            log.info("click on : {} ", product);
-            product.getElementWithLabel(number).click();
-        } catch (ElementClickInterceptedException e) {
-            JSUtils.jsScroll(driver, product.getLocatorWithLabel(number));
-            log.info("JS scroll");
-            WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
-            log.info("click on : {} ", product);
-            product.getElementWithLabel(number).click();
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                JSUtils.jsScroll(driver, product.getLocatorWithLabel(number));
+                log.info("Scrolled to product with index: {}", number);
+                WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
+                product.getElementWithLabel(number).click();
+                log.info("click on : {} ", product.getNameElement());
+                return;
+            } catch (ElementClickInterceptedException e) {
+                log.warn("Attempt {} failed for product {}", attempts + 1, number);
+                attempts++;
+            }
         }
+        throw new RuntimeException("Failed to click product with index " + number + " after 3 attempts");
     }
 
     public ProductPage goToProductRandom(int item) {
-        goToProductWithRandom(PRODUCT, item);
+        goToProductWithName(PRODUCT, item);
         return new ProductPage(driver);
     }
 
     public ProductListPage goToFavoritesRandom(int item) {
-
-            String number = Integer.toString(item);
-            try {
-                ActionUtils.hoverClickElement(By.xpath(String.format(PRODUCT, number)), By.xpath(FAVORITES), driver);
-
-            } catch (ElementClickInterceptedException e) {
-                JSUtils.jsScroll(driver, By.xpath(String.format(PRODUCT, number)));
-                log.info("JS scroll");
-                ActionUtils.hoverClickElement(By.xpath(String.format(PRODUCT, number)), By.xpath(FAVORITES), driver);
-            }
+        String number = Integer.toString(item);
+        try {
+            ActionUtils.hoverClickElement(By.xpath(String.format(PRODUCT, number)), By.xpath(FAVORITES), driver);
+        } catch (ElementClickInterceptedException e) {
+            JSUtils.jsScroll(driver, By.xpath(String.format(PRODUCT, number)));
+            log.info("Scrolled to product");
+            ActionUtils.hoverClickElement(By.xpath(String.format(PRODUCT, number)), By.xpath(FAVORITES), driver);
+        }
         return this;
     }
 
@@ -117,26 +117,6 @@ public class ProductListPage extends HeaderPage {
         }
     }
 
-    public ProductListPage addProductsToCart(String mySize, int quantity) {
-        int checkedQuantity = checkQuantityOfProducts(quantity);
-        for(int i = 1; i <= checkedQuantity; i++) {
-            try {
-                goToProductRandom(i*2)
-                        .chooseSize(mySize)
-                        .goToShoppingCart()
-                        .continueShopping();
-                driver.navigate().back();
-                isPageLoaded();
-                log.info("Successfully added product");
-            } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
-                log.warn("Error adding product");
-                driver.navigate().back();
-                isPageLoaded();
-            }
-        }
-        return this;
-    }
-
     public int checkQuantityOfProducts(int quantity) {
         int productsCount = getProductsQuantity();
         if (quantity > productsCount) {
@@ -146,24 +126,5 @@ public class ProductListPage extends HeaderPage {
         } else {
             return quantity;
         }
-    }
-
-    public ProductListPage addProductsToCart(int quantity) {
-        int checkedQuantity = checkQuantityOfProducts(quantity);
-        for(int i = 1; i <= checkedQuantity; i++) {
-            try {
-                goToProductRandom(i*2)
-                        .goToShoppingCart()
-                        .continueShopping();
-                driver.navigate().back();
-                isPageLoaded();
-                log.info("Successfully added product");
-            } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
-                log.warn("Error adding product");
-                driver.navigate().back();
-                isPageLoaded();
-            }
-        }
-        return this;
     }
 }

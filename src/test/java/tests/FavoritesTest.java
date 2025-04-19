@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class FavoritesTest extends BaseTest {
 
-    @Test
+    @Test(description = "adding several products to favorites and checking their quantity in the cart, clearing favorites")
     public void addProductToFavoritesAndCheckQuantity() {
         loginSteps
                 .loginAndCheckPageIsOpened(PropertyReader.getProperty(EMAIL),PropertyReader.getProperty(PASSWORD));

@@ -11,7 +11,7 @@ public class FavoritesSteps extends BaseSteps {
         super(driver);
     }
 
-    @Step
+    @Step("add products to favorites")
     public FavoritesSteps addProductsToFavorites(Gender gender, String locatorLabel, String menuLabel, int quantity) {
         headerPage
                 .chooseGender(gender)
@@ -25,7 +25,7 @@ public class FavoritesSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("open favorites page")
     public FavoritesSteps goToFavorites() {
         headerPage
                 .goToFavoritesPage()
@@ -33,13 +33,13 @@ public class FavoritesSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("check quantity of products")
     public FavoritesSteps checkQuantityOfProducts(int quantity) {
         Assert.assertEquals(favoritesPage.getQuantityOfProducts(), quantity);
         return this;
     }
 
-    @Step
+    @Step("deleting all items from favorites")
     public FavoritesSteps deleteAllProductsInFavorites() {
         favoritesPage.deleteFromFavorites();
         return this;

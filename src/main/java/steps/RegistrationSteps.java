@@ -11,7 +11,7 @@ public class RegistrationSteps extends BaseSteps {
         super(driver);
     }
 
-    @Step
+    @Step("register and check page is opened")
     public RegistrationSteps registerAndCheckPageIsOpened(User user) {
         homePage
                 .openPage();
@@ -24,7 +24,7 @@ public class RegistrationSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("fill registration form")
     public RegistrationSteps fillRegistrationForm(User user) {
         homePage
                 .openPage();

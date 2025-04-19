@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import pages.modals.LoginModalPage;
 import utils.ActionUtils;
 import utils.WaitUtils;
@@ -63,6 +62,7 @@ public class HeaderPage extends BasePage {
         By elementLocator = By.xpath(String.format(SECTION_BUTTONS, menuLabel));
         By elementMenuLocator = By.xpath(String.format(HOVER_SUB_SECTIONS_BUTTON, subMenuLabel));
         ActionUtils.hoverClickElement(elementLocator, elementMenuLocator, driver);
+        log.info("Click on heart item");
         return new ProductListPage(driver);
     }
 
@@ -75,7 +75,7 @@ public class HeaderPage extends BasePage {
     public HeaderPage chooseGender(Gender gender) {
         WaitUtils.waitForElementToBeClickable(driver, genderButton.getLocatorWithLabel(gender.getName()));
         genderButton.getElementWithLabel(gender.getName()).click();
-        log.info("Выбор гендера: {}", gender.getName());
+        log.info("Gender selection: {}", gender.getName());
         WaitUtils.waitForElementToBeClickable(driver, shoppingCartButton.getLocator());
         return this;
     }
@@ -100,14 +100,17 @@ public class HeaderPage extends BasePage {
 
     public HomePage logout() {
         ActionUtils.hoverClickElement(profileHover.getLocatorWithLabel("Профиль"), By.xpath(LOGOUT), driver);
+        log.info("Click on logout button");
         return new HomePage(driver);
     }
 
     public boolean checkLogout() {
         try{
             WaitUtils.waitForElementToBeClickable(driver, loginButton.getElement());
+            log.info("successful logout");
             return true;
         } catch (TimeoutException e){
+            log.info("logout failed");
             return false;
         }
     }

@@ -6,7 +6,6 @@ public interface IConstants {
     String PASSWORD = "password";
     String EMAIL = "email";
     String HOME_URL = "https://www.lamoda.by/";
-    By CATEGORIES = By.xpath("//*[text()='Категории']");
     String SECTION_BUTTONS = "//a[normalize-space()='%s']";
     String HOVER_SUB_SECTIONS_BUTTON = "//*[@category=\"[object Object]\"]//*[text()='%s']";
     String REGISTRATION_INPUTS = "//*[contains(text(),'%s')]/..//input";
@@ -28,13 +27,10 @@ public interface IConstants {
 
     String DROPDOWN_SUB_MENU = "//*[@class=\"popover-content\"]//span[text()='%s']";
     String DROPDOWN = "//span[contains(text(),'%s')]";
-    String DROPDOWN_INPUT_MIN = "//input[@name=\"minRange\"]";
-    String DROPDOWN_INPUT_MAX = "//input[@name=\"maxRange\"]";
     String DROPDOWN_APPLY_BUTTON = "//*[@class=\"popover-content\"]//button";
 
     String PRODUCTS_IN_PAGE = "//*[contains(@class, 'x-product-card__link')]";
     String PRODUCT = "(//*[contains(@class, 'x-product-card__link')])[%s]";
-//    String FAVORITES = PRODUCT + "//*[contains(@class, 'icon_heart-recommendations')]";
     String FAVORITES = "//*[contains(@class, 'icon_heart-recommendations')]";
     String PRODUCT_DESCRIPTION_ABOUT_THE_PRODUCT = "//*[normalize-space()='%s']/ancestor::p//*[contains(@class, '_value_ajirn_27')]";
     String RESET_FILTER_BUTTON = "//*[contains(@class, 'icon__filter_reset')]";

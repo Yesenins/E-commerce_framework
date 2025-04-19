@@ -1,14 +1,16 @@
 package pages;
 
 import elements.Button;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.WaitUtils;
-
+@Log4j2
 public class HomePage extends HeaderPage {
 
     protected final Button superButton = new Button("//button[normalize-space()='Супер!']", "super",driver);
     protected final String MODAL = "//div[@id=\"modals\"]";
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -16,6 +18,7 @@ public class HomePage extends HeaderPage {
     @Override
     public HomePage openPage() {
         driver.get(HOME_URL);
+        log.info("Open home page");
         return this;
     }
 

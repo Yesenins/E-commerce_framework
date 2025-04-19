@@ -4,7 +4,7 @@ import objects.Gender;
 import org.testng.annotations.Test;
 
 public class FullFlowTest extends BaseTest {
-    @Test
+    @Test(description = "add multiple items to cart, search by item name, add to cart, check if all items are displayed in cart, check price")
     public void fullUserFlowFromAddProductToCheckoutTest() {
         shoppingCartSteps
                 .openPage()
@@ -15,7 +15,7 @@ public class FullFlowTest extends BaseTest {
                 .search("рюкзак");
         shoppingCartSteps
                 .isProductListPageLoaded()
-                .addProductsToCart(3)
+                .addProductsToCart(null,3)
                 .isProductListPageLoaded()
                 .goToShoppingCart();
         shoppingCartSteps
