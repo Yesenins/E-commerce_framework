@@ -22,4 +22,12 @@ public class LoginTest extends BaseTest {
         loginSteps.passwordEntry("testnetqwer@mail.com","q")
                 .checkErrorMessageOutput(INCORRECT_DATA_IN_PASSWORD_FIELDS);
     }
+
+    @Test
+    public void logoutTest() {
+        loginSteps
+                .loginAndCheckPageIsOpened(PropertyReader.getProperty(EMAIL),PropertyReader.getProperty(PASSWORD))
+                .logout()
+                .logoutCheck();
+    }
 }
