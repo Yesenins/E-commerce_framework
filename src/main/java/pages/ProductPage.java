@@ -48,14 +48,14 @@ public class ProductPage extends HeaderPage {
         size.actionClickOn();
         WaitUtils.waitForElementToBeVisible(driver, By.xpath(SIZE_SUB_MENU));
         List<WebElement> sizes = driver.findElements(By.xpath(SIZE_SUB_MENU));
-        log.info("Найдено размеров в дропдауне: {}", sizes.size());
+        log.info("Found sizes in the dropdown: {}", sizes.size());
         return sizes;
     }
 
     public List<WebElement> getAllSizeInTable() {
         WaitUtils.waitForElementToBeVisible(driver, By.xpath(SIZE_TABLE));
         List<WebElement> sizes = driver.findElements(By.xpath(SIZE_TABLE));
-        log.info("Найдено размеров в таблице: {}", sizes.size());
+        log.info("Found sizes in the table: {}", sizes.size());
         return sizes;
     }
 
@@ -74,24 +74,24 @@ public class ProductPage extends HeaderPage {
 
     public ProductPage getSize(List<WebElement> sizes, String mySize, String attribute) {
         if (sizes.isEmpty()) {
-            log.warn("Список размеров пуст");
+            log.warn("The size list is empty");
             return this;
         }
         for(WebElement item : sizes) {
             String fullClassAttribute = item.getDomAttribute("class");
             if(item.getText().contains(mySize)) {
                 if(fullClassAttribute.contains(attribute)) {
-                    log.info("Размер {} недоступен", mySize);
+                    log.info("Size {} is not available", mySize);
                     return this;
                 } else {
                     WaitUtils.waitForElementToBeClickable(driver, item);
                     item.click();
-                    log.info("Размер {} выбран", mySize);
+                    log.info("Size {} selected", mySize);
                     return this;
                 }
             }
         }
-        log.warn("Размер {} не найден в списке", mySize);
+        log.warn("Size {} not found in the list", mySize);
         return this;
     }
 

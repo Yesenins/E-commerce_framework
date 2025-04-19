@@ -1,12 +1,13 @@
 package elements;
 
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import utils.WaitUtils;
 
 import java.time.Duration;
-
+@Data
 @Log4j2
 public class BaseElement {
     protected String locator;

@@ -13,20 +13,20 @@ public class SearchSteps extends BaseSteps {
         super(driver);
     }
 
-    @Step
+    @Step("open page")
     public SearchSteps openPage() {
         homePage
                 .openPage()
                 .isPageLoaded();
         return this;
     }
-    @Step
+    @Step("entering in the search field without pressing search")
     public SearchSteps autosuggestSearch(String text) {
         headerPage.autosuggestSearch(text);
         return this;
     }
 
-    @Step
+    @Step("search field entry")
     public SearchSteps searchProduct(String productName) {
         headerPage
                 .searchTextInput(productName)
@@ -34,7 +34,7 @@ public class SearchSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("autosuggest operation check")
     public SearchSteps checkAutosuggest(String text) {
 
         List<WebElement> list = headerPage.getAutosuggestList(text);
@@ -44,7 +44,7 @@ public class SearchSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("check product is displayed in the search result")
     public SearchSteps checkProductIsDisplayedInTheSearchResult(String brand, String product) {
         productListPage.isPageLoaded();
         List<String> list = productListPage.getProductNames(PRODUCT_NAME);
@@ -60,13 +60,13 @@ public class SearchSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("check search error message")
     public SearchSteps checkSearchErrorMessage(String text) {
         Assert.assertEquals(productListPage.getSearchErrorMessage(),String.format(SEARCH_ERROR_MESSAGE,text));
         return this;
     }
 
-    @Step
+    @Step("switch to the hover menu and open the selected category")
     public SearchSteps goToHoverMenu(String locatorLabel, String menuLabel) {
         headerPage
                 .goToHoverMenu(locatorLabel, menuLabel)
@@ -74,7 +74,7 @@ public class SearchSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("search filter setting")
     public SearchSteps filter(String label, String subMenuLocator) {
         productListPage
                 .filter(label, subMenuLocator)
@@ -82,7 +82,7 @@ public class SearchSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("check that the filter correctly displays the selected products")
     public SearchSteps filterInspection(String label, String expectedResult) {
         int productListSize = productListPage.getProductList().size();
         for (int i = 0; i < productListSize; i++) {
@@ -98,7 +98,7 @@ public class SearchSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("search")
     public SearchSteps search(String text) {
         headerPage.searchTextInput(text);
         return this;

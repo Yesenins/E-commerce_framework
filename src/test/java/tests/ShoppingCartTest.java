@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class ShoppingCartTest extends BaseTest {
 
-    @Test
+    @Test(description = "adding an item to the cart and checking if it is displayed in the cart")
     public void addProductToShoppingCartTest() {
         shoppingCartSteps
                 .openPage()

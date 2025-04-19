@@ -11,7 +11,7 @@ public class LoginSteps extends BaseSteps {
         super(driver);
     }
 
-    @Step
+    @Step("entering data in the email field")
     public LoginSteps emailEntry(String email) {
         homePage.openPage();
         headerPage.goToLogin()
@@ -20,7 +20,7 @@ public class LoginSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("entering data in the password field")
     public LoginSteps passwordEntry(String email, String password) {
         homePage.openPage();
         headerPage.goToLogin()
@@ -31,7 +31,7 @@ public class LoginSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("login and check that you have logged in successfully")
     public LoginSteps loginAndCheckPageIsOpened(String email, String password) {
         homePage.openPage();
         headerPage.goToLogin()
@@ -51,13 +51,13 @@ public class LoginSteps extends BaseSteps {
         return this;
     }
 
-    @Step
+    @Step("logout")
     public LoginSteps logout() {
         headerPage.logout();
         return this;
     }
 
-    @Step
+    @Step("check that the logout was successful")
     public LoginSteps logoutCheck() {
         Assert.assertTrue(headerPage.checkLogout());
         return this;

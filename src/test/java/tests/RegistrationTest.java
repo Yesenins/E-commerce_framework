@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class RegistrationTest extends BaseTest {
 
-    @Test
+    @Test(description = "success registration")
     public void successRegistrationTest() {
         User user = User.builder()
                 .name("Serega")
@@ -15,7 +15,7 @@ public class RegistrationTest extends BaseTest {
         registrationSteps.registerAndCheckPageIsOpened(user);
     }
 
-    @Test
+    @Test(description = "entering incorrect data in the registration fields")
     public void registrationWithIncorrectFieldsTest() {
         User user = User.builder()
                 .name("!£$")
@@ -30,7 +30,7 @@ public class RegistrationTest extends BaseTest {
                 .checkErrorMessageOutput(PASSWORD_ERROR_MESSAGE);
     }
 
-    @Test
+    @Test(description = "entering an incorrect password in the repeated password field")
     public void registrationWithWrongReplyPasswordTest() {
         User user = User.builder()
                 .name("Serega")
