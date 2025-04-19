@@ -20,12 +20,18 @@ public class ShoppingCartSteps extends BaseSteps {
     }
 
     @Step
+    public ShoppingCartSteps isProductListPageLoaded() {
+        productListPage.isPageLoaded();
+        return this;
+    }
+
+    @Step
     public ShoppingCartSteps addProductToCartAndCheckProductName(Gender gender, String locatorLabel, String menuLabel, String mySize) {
         headerPage
                 .chooseGender(gender)
                 .goToHoverMenu(locatorLabel, menuLabel)
                 .isPageLoaded()
-                .goToProductRandom()
+                .goToProductRandom(1)
                 .chooseSize(mySize);
         String actualName = productPage.getProductName();
         productPage
@@ -40,22 +46,28 @@ public class ShoppingCartSteps extends BaseSteps {
     }
 
     @Step
-    public ShoppingCartSteps addProductsToCart(Gender gender, String locatorLabel, String menuLabel, String mySize, int quantity) {
+    public ShoppingCartSteps chooseGenderAndOpenProductsList(Gender gender, String locatorLabel, String menuLabel) {
         headerPage
                 .chooseGender(gender)
                 .goToHoverMenu(locatorLabel, menuLabel)
                 .isPageLoaded();
-        for(int i = 0; i < quantity; i++) {
-            productListPage
-                    .goToProductRandom()
-                    .chooseSize(mySize)
-                    .goToShoppingCart()
-                    .continueShopping()
-                    .isPageLoaded();
-            headerPage
-                    .clickOnSectionButton(locatorLabel)
-                    .isPageLoaded();
-        }
+        return this;
+    }
+
+    @Step
+    public ShoppingCartSteps addProductsToCart(String mySize, int quantity) {
+        productListPage.addProductsToCart(mySize, quantity);
+        return this;
+    }
+
+    @Step
+    public ShoppingCartSteps addProductsToCart(int quantity) {
+        productListPage.addProductsToCart(quantity);
+        return this;
+    }
+
+    @Step
+    public ShoppingCartSteps goToShoppingCart() {
         headerPage.goToShoppingCartPage()
                 .isPageLoaded();
         return this;
@@ -63,8 +75,19 @@ public class ShoppingCartSteps extends BaseSteps {
 
     @Step
     public ShoppingCartSteps checkQuantityOfAddedProducts(int quantity) {
-        Assert.assertEquals(shoppingCartPage.getQuantityOfProducts(), quantity + "");
+        Assert.assertEquals(shoppingCartPage.getQuantityOfProducts(), quantity);
         return this;
     }
 
+    @Step
+    public ShoppingCartSteps filter(String locator, String subMenuLocator) {
+        productListPage.filter(locator, subMenuLocator);
+        return this;
+    }
+
+    @Step
+    public ShoppingCartSteps checkFullPrice() {
+        Assert.assertEquals(shoppingCartPage.getPrice(), shoppingCartPage.getFullPrice());
+        return this;
+    }
 }

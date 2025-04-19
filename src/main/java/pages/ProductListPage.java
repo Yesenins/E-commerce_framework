@@ -4,11 +4,12 @@ import elements.Button;
 import elements.Dropdown;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
+import utils.ActionUtils;
+import utils.JSUtils;
 import utils.WaitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Log4j2
 public class ProductListPage extends HeaderPage {
@@ -28,7 +29,8 @@ public class ProductListPage extends HeaderPage {
         return this;
     }
 
-    public ProductListPage isPageOpenedAfterFilter() {
+    public ProductListPage isPageLoadedAfterFilter() {
+        WaitUtils.waitForElementToBeClickable(driver, By.xpath(String.format(PRODUCT, 1)));
         WaitUtils.waitForElementToBeVisible(driver, By.xpath(RESET_FILTER_BUTTON));
         return this;
     }
@@ -38,30 +40,40 @@ public class ProductListPage extends HeaderPage {
         return new ProductPage(driver);
     }
 
-    public void goToProductWithRandom(String locator) {
-        Random random = new Random();
-        int item = random.nextInt(1, 25);
+    protected void goToProductWithRandom(String locator, int item) {
         String number = Integer.toString(item);
         Button product = new Button(locator, "product", driver);
         try {
-            WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
-            product.getElementWithLabel(item + "").click();
-        } catch (ElementClickInterceptedException e) {
-            log.info("JS scroll: {} ", e.getMessage());
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", product.getElementWithLabel(number));
+            JSUtils.jsScroll(driver, product.getLocatorWithLabel(number));
+            log.info("JS scroll");
             WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
             log.info("click on : {} ", product);
-            product.getElementWithLabel(item + "").click();
+            product.getElementWithLabel(number).click();
+        } catch (ElementClickInterceptedException e) {
+            JSUtils.jsScroll(driver, product.getLocatorWithLabel(number));
+            log.info("JS scroll");
+            WaitUtils.waitForElementToBeClickable(driver, product.getLocatorWithLabel(number));
+            log.info("click on : {} ", product);
+            product.getElementWithLabel(number).click();
         }
     }
 
-    public ProductPage goToProductRandom() {
-        goToProductWithRandom(PRODUCT);
+    public ProductPage goToProductRandom(int item) {
+        goToProductWithRandom(PRODUCT, item);
         return new ProductPage(driver);
     }
 
-    public ProductListPage goToFavoritesRandom() {
-        goToProductWithRandom(FAVORITES);
+    public ProductListPage goToFavoritesRandom(int item) {
+
+            String number = Integer.toString(item);
+            try {
+                ActionUtils.hoverClickElement(By.xpath(String.format(PRODUCT, number)), By.xpath(FAVORITES), driver);
+
+            } catch (ElementClickInterceptedException e) {
+                JSUtils.jsScroll(driver, By.xpath(String.format(PRODUCT, number)));
+                log.info("JS scroll");
+                ActionUtils.hoverClickElement(By.xpath(String.format(PRODUCT, number)), By.xpath(FAVORITES), driver);
+            }
         return this;
     }
 
@@ -78,11 +90,20 @@ public class ProductListPage extends HeaderPage {
         WaitUtils.waitForElementToBeClickable(driver, filter.getLocatorWithLabel(label));
         filter.selectFromDropdown(label, DROPDOWN_SUB_MENU, subMenuLabel);
         applyButton.clickOn();
-        return this;
+        isPageLoadedAfterFilter();
+        return new ProductListPage(driver);
     }
 
     public List<WebElement> getProductList() {
-        return driver.findElements(By.xpath(PRODUCT));
+        return driver.findElements(By.xpath(PRODUCTS_IN_PAGE));
+    }
+
+    public int getProductsQuantity() {
+        isPageLoaded();
+        WaitUtils.waitForElementToBeClickable(driver, By.xpath(PRODUCTS_IN_PAGE));
+        int size = driver.findElements(By.xpath(PRODUCTS_IN_PAGE)).size();
+        log.info("Quantity of products in page is: {}", size);
+        return size;
     }
 
     public String getSearchErrorMessage() {
@@ -94,5 +115,55 @@ public class ProductListPage extends HeaderPage {
             log.error("Failed to get search field error message.", e);
             return "";
         }
+    }
+
+    public ProductListPage addProductsToCart(String mySize, int quantity) {
+        int checkedQuantity = checkQuantityOfProducts(quantity);
+        for(int i = 1; i <= checkedQuantity; i++) {
+            try {
+                goToProductRandom(i*2)
+                        .chooseSize(mySize)
+                        .goToShoppingCart()
+                        .continueShopping();
+                driver.navigate().back();
+                isPageLoaded();
+                log.info("Successfully added product");
+            } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
+                log.warn("Error adding product");
+                driver.navigate().back();
+                isPageLoaded();
+            }
+        }
+        return this;
+    }
+
+    public int checkQuantityOfProducts(int quantity) {
+        int productsCount = getProductsQuantity();
+        if (quantity > productsCount) {
+            log.warn("Requested quantity ({}) exceeds available products ({})", quantity, productsCount);
+            quantity = productsCount;
+            return quantity;
+        } else {
+            return quantity;
+        }
+    }
+
+    public ProductListPage addProductsToCart(int quantity) {
+        int checkedQuantity = checkQuantityOfProducts(quantity);
+        for(int i = 1; i <= checkedQuantity; i++) {
+            try {
+                goToProductRandom(i*2)
+                        .goToShoppingCart()
+                        .continueShopping();
+                driver.navigate().back();
+                isPageLoaded();
+                log.info("Successfully added product");
+            } catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {
+                log.warn("Error adding product");
+                driver.navigate().back();
+                isPageLoaded();
+            }
+        }
+        return this;
     }
 }

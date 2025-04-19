@@ -17,6 +17,7 @@ public class BaseTest implements IConstants {
     SearchSteps searchSteps;
     ShoppingCartSteps shoppingCartSteps;
     FavoritesSteps favoritesSteps;
+    FullFlowSteps fullFlowSteps;
 
     @BeforeMethod
     public void setUpDriver() {
@@ -30,6 +31,7 @@ public class BaseTest implements IConstants {
         searchSteps = new SearchSteps(driver);
         shoppingCartSteps = new ShoppingCartSteps(driver);
         favoritesSteps = new FavoritesSteps(driver);
+        fullFlowSteps = new FullFlowSteps(driver);
     }
 
     @AfterMethod

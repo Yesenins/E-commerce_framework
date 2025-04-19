@@ -32,8 +32,10 @@ public interface IConstants {
     String DROPDOWN_INPUT_MAX = "//input[@name=\"maxRange\"]";
     String DROPDOWN_APPLY_BUTTON = "//*[@class=\"popover-content\"]//button";
 
+    String PRODUCTS_IN_PAGE = "//*[contains(@class, 'x-product-card__link')]";
     String PRODUCT = "(//*[contains(@class, 'x-product-card__link')])[%s]";
-    String FAVORITES = PRODUCT + "//*[contains(@class, 'icon_heart-recommendations')]";
+//    String FAVORITES = PRODUCT + "//*[contains(@class, 'icon_heart-recommendations')]";
+    String FAVORITES = "//*[contains(@class, 'icon_heart-recommendations')]";
     String PRODUCT_DESCRIPTION_ABOUT_THE_PRODUCT = "//*[normalize-space()='%s']/ancestor::p//*[contains(@class, '_value_ajirn_27')]";
     String RESET_FILTER_BUTTON = "//*[contains(@class, 'icon__filter_reset')]";
 }
