@@ -78,7 +78,7 @@ public class SearchSteps extends BaseSteps {
     public SearchSteps filter(String label, String subMenuLocator) {
         productListPage
                 .filter(label, subMenuLocator)
-                .isPageOpenedAfterFilter();
+                .isPageLoadedAfterFilter();
         return this;
     }
 
@@ -93,8 +93,14 @@ public class SearchSteps extends BaseSteps {
             String text = driver.findElement(By.xpath(String.format(PRODUCT_DESCRIPTION_ABOUT_THE_PRODUCT,label))).getText();
             Assert.assertEquals(text, expectedResult);
             driver.navigate().back();
-            productListPage.isPageOpenedAfterFilter();
+            productListPage.isPageLoadedAfterFilter();
         }
+        return this;
+    }
+
+    @Step
+    public SearchSteps search(String text) {
+        headerPage.searchTextInput(text);
         return this;
     }
 }

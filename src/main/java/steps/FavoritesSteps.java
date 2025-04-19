@@ -17,9 +17,9 @@ public class FavoritesSteps extends BaseSteps {
                 .chooseGender(gender)
                 .goToHoverMenu(locatorLabel, menuLabel)
                 .isPageLoaded();
-        for(int i = 0; i < quantity; i++) {
+        for(int i = 1; i <= quantity; i++) {
             productListPage
-                    .goToFavoritesRandom()
+                    .goToFavoritesRandom(i*2)
                     .isPageLoaded();
         }
         return this;
