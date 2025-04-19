@@ -6,8 +6,10 @@ import elements.Input;
 import lombok.extern.log4j.Log4j2;
 import objects.Gender;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import pages.modals.LoginModalPage;
 import utils.ActionUtils;
 import utils.WaitUtils;
@@ -23,6 +25,7 @@ public class HeaderPage extends BasePage {
     protected final Button genderButton = new Button("//*[@data-genders='%s']", "genderButton", driver);
     protected final Button shoppingCartButton = new Button("//*[@href=\"/checkout/cart/\"]", "shoppingCartButton", driver);
     protected final Button favoritesButton = new Button("//a[normalize-space()='Избранное']", "favorites", driver);
+    protected final String LOGOUT = "//*[@href=\"/customer/account/logout/\"]";
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -95,4 +98,17 @@ public class HeaderPage extends BasePage {
         return new FavoritesPage(driver);
     }
 
+    public HomePage logout() {
+        ActionUtils.hoverClickElement(profileHover.getLocatorWithLabel("Профиль"), By.xpath(LOGOUT), driver);
+        return new HomePage(driver);
+    }
+
+    public boolean checkLogout() {
+        try{
+            WaitUtils.waitForElementToBeClickable(driver, loginButton.getElement());
+            return true;
+        } catch (TimeoutException e){
+            return false;
+        }
+    }
 }

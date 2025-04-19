@@ -50,4 +50,16 @@ public class LoginSteps extends BaseSteps {
         Assert.assertEquals(loginModalPage.getLoginFieldErrorMessage(), errorMessage);
         return this;
     }
+
+    @Step
+    public LoginSteps logout() {
+        headerPage.logout();
+        return this;
+    }
+
+    @Step
+    public LoginSteps logoutCheck() {
+        Assert.assertTrue(headerPage.checkLogout());
+        return this;
+    }
 }
