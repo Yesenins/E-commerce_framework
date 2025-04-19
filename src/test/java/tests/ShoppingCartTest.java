@@ -2,6 +2,7 @@ package tests;
 
 import objects.Gender;
 import org.testng.annotations.Test;
+import retryAnalyzer.RetryAnalyzer;
 
 public class ShoppingCartTest extends BaseTest {
 
@@ -12,7 +13,7 @@ public class ShoppingCartTest extends BaseTest {
                 .addProductToCartAndCheckProductName(Gender.MEN,"Обувь", "Ботинки", "42");
     }
 
-    @Test(description = "Check that the cart page shows the added quantity of goods")
+    @Test(retryAnalyzer = RetryAnalyzer.class, description = "Check that the cart page shows the added quantity of goods")
     public void displayTheNumberOfGoodsOnCartAddTest() {
         shoppingCartSteps
                 .openPage()
