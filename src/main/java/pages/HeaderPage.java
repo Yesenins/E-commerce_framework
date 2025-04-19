@@ -62,7 +62,7 @@ public class HeaderPage extends BasePage {
         By elementLocator = By.xpath(String.format(SECTION_BUTTONS, menuLabel));
         By elementMenuLocator = By.xpath(String.format(HOVER_SUB_SECTIONS_BUTTON, subMenuLabel));
         ActionUtils.hoverClickElement(elementLocator, elementMenuLocator, driver);
-        log.info("Click on heart item");
+        log.info("Click on hover item");
         return new ProductListPage(driver);
     }
 
