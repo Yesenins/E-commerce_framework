@@ -16,7 +16,9 @@ public class ShoppingCartTest extends BaseTest {
     public void displayTheNumberOfGoodsOnCartAddTest() {
         shoppingCartSteps
                 .openPage()
-                .addProductsToCart(Gender.MEN,"Обувь", "Ботинки", "42", 3)
+                .chooseGenderAndOpenProductsList(Gender.MEN,"Обувь", "Ботинки")
+                .addProductsToCart("42", 3)
+                .goToShoppingCart()
                 .checkQuantityOfAddedProducts(3);
     }
 }
