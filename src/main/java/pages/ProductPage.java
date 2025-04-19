@@ -65,6 +65,7 @@ public class ProductPage extends HeaderPage {
         return this;
     }
 
+
     public ProductPage chooseSizeFromTable(String mySize) {
         List<WebElement> size = getAllSizeInTable();
         getSize(size, mySize, "_disabled_sez4k_36");

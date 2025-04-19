@@ -56,9 +56,9 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public ProductListPage goToHoverMenu(String locatorLabel, String menuLabel) {
-        By elementLocator = By.xpath(String.format(SECTION_BUTTONS, locatorLabel));
-        By elementMenuLocator = By.xpath(String.format(HOVER_SUB_SECTIONS_BUTTON, menuLabel));
+    public ProductListPage goToHoverMenu(String menuLabel, String subMenuLabel) {
+        By elementLocator = By.xpath(String.format(SECTION_BUTTONS, menuLabel));
+        By elementMenuLocator = By.xpath(String.format(HOVER_SUB_SECTIONS_BUTTON, subMenuLabel));
         ActionUtils.hoverClickElement(elementLocator, elementMenuLocator, driver);
         return new ProductListPage(driver);
     }
@@ -85,6 +85,7 @@ public class HeaderPage extends BasePage {
     }
 
     public ShoppingCartPage goToShoppingCartPage() {
+        ActionUtils.scrollToTopWithActions(driver);
         shoppingCartButton.clickOn();
         return new ShoppingCartPage(driver);
     }
