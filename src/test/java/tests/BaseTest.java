@@ -21,8 +21,9 @@ public class BaseTest implements IConstants {
     ShoppingCartSteps shoppingCartSteps;
     FavoritesSteps favoritesSteps;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUpDriver() {
+        System.out.println("Initializing driver");
         driver = WebDriverFactory.createDriver(BrowserTypes.CHROME);
         initSteps();
     }
@@ -35,7 +36,7 @@ public class BaseTest implements IConstants {
         favoritesSteps = new FavoritesSteps(driver);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void quitDriver() {
         if(driver != null) {
             driver.quit();

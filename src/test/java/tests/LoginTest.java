@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
         loginSteps.loginAndCheckPageIsOpened(PropertyReader.getProperty(EMAIL),PropertyReader.getProperty(PASSWORD));
     }
 
-    @Test(description = "entering incorrect data in the login field")
+    @Test(groups = {"smoke"}, description = "entering incorrect data in the login field")
     public void loginWithIncorrectFieldsTest() {
         loginSteps.emailEntry("testnetqwermail.com")
                 .checkErrorMessageOutput(INCORRECT_DATA_IN_LOGIN_FIELDS);

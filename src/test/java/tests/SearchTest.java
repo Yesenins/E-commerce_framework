@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class SearchTest extends BaseTest {
 
-    @Test(description = "check the operation of the autosuggest in the search field")
+    @Test(groups = {"smoke"}, description = "check the operation of the autosuggest in the search field")
     public void autosuggestInTheSearchFieldTest() {
         searchSteps
                 .openPage()
@@ -12,7 +12,7 @@ public class SearchTest extends BaseTest {
                 .checkAutosuggest("hansen");
     }
 
-    @Test(description = "search for a product by name and check its display in the search results")
+    @Test(groups = {"smoke"}, description = "search for a product by name and check its display in the search results")
     public void searchProductTest() {
         searchSteps
                 .openPage()
@@ -20,7 +20,7 @@ public class SearchTest extends BaseTest {
                 .checkProductIsDisplayedInTheSearchResult("puma","suede classic");
     }
 
-    @Test(description = "invalid search")
+    @Test(groups = {"smoke"}, description = "invalid search")
     public void invalidSearchTest() {
         searchSteps
                 .openPage()
@@ -28,7 +28,7 @@ public class SearchTest extends BaseTest {
                 .checkSearchErrorMessage("aasdfgs");
     }
 
-    @Test(description = "checking the operation of the product search filter")
+    @Test(groups = {"smoke"}, description = "checking the operation of the product search filter")
     public void searchFilterTest() {
         searchSteps
                 .openPage()
