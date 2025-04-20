@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Lamoda Test Suite" parallel="tests" thread-count="2">
+    <test name="SearchTest">
+        <classes>
+            <class name="tests.SearchTest">
+                <methods>
+                    <include name="searchFilterTest"/>
+                    <include name="invalidSearchTest"/>
+                    <include name="searchProductTest"/>
+                    <include name="autosuggestInTheSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
