@@ -3,7 +3,7 @@
 <suite name="Lamoda Test Suite" parallel="tests" thread-count="2">
     <test name="ShoppingCartTest">
         <classes>
-            <class name="tests.SearchTest">
+            <class name="tests.ShoppingCartTest">
                 <methods>
                     <include name="displayTheNumberOfGoodsOnCartAddTest"/>
                     <include name="addProductToShoppingCartTest"/>
