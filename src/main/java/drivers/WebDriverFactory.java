@@ -23,8 +23,8 @@ public class WebDriverFactory {
     private static ChromeDriver createChromeDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized", "disable-gpu", "--incognito");
-//        options.addArguments("--headless", "disable-gpu", "--incognito");
+//        options.addArguments("--start-maximized", "disable-gpu", "--incognito");
+        options.addArguments("--headless", "disable-gpu", "--incognito");
         return new ChromeDriver(options);
     }
 
