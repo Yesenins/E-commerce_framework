@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Lamoda Test Suite" parallel="tests" thread-count="2">
-    <test name="Smoke">
-        <classes>
-            <class name="tests.LoginTest" >
-                <methods>
-                    <exclude name="successLoginTest"/>
-                    <exclude name="logoutTest"/>
-                </methods>
-            </class>
-            <class name="tests.RegistrationTest">
-                <methods>
-                    <exclude name="successRegistrationTest"/>
-                </methods>
-            </class>
-            <class name="tests.SearchTest"/>
-            <class name="tests.ShoppingCartTest"/>
-            <class name="tests.FullFlowTest"/>
-        </classes>
+    <test name="SmokeTest">
+        <groups>
+            <run>
+                <include name="smoke" />
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.*" />
+        </packages>
+<!--        <classes>-->
+<!--            <class name="tests.RegistrationTest"/>-->
+<!--            <class name="tests.LoginTest"/>-->
+<!--            <class name="tests.SearchTest"/>-->
+<!--            <class name="tests.ShoppingCartTest"/>-->
+<!--            <class name="tests.FullFlowTest"/>-->
+<!--        </classes>-->
     </test>
 </suite>

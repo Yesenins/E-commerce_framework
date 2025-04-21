@@ -15,7 +15,7 @@ public class RegistrationTest extends BaseTest {
         registrationSteps.registerAndCheckPageIsOpened(user);
     }
 
-    @Test(description = "entering incorrect data in the registration fields")
+    @Test(groups = {"smoke"}, description = "entering incorrect data in the registration fields")
     public void registrationWithIncorrectFieldsTest() {
         User user = User.builder()
                 .name("!£$")
@@ -30,7 +30,7 @@ public class RegistrationTest extends BaseTest {
                 .checkErrorMessageOutput(PASSWORD_ERROR_MESSAGE);
     }
 
-    @Test(description = "entering an incorrect password in the repeated password field")
+    @Test(groups = {"smoke"}, description = "entering an incorrect password in the repeated password field")
     public void registrationWithWrongReplyPasswordTest() {
         User user = User.builder()
                 .name("Serega")
