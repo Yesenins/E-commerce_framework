@@ -5,7 +5,8 @@ import org.testng.annotations.Test;
 import retryAnalyzer.RetryAnalyzer;
 
 public class FullFlowTest extends BaseTest {
-    @Test(groups = {"smoke"}, retryAnalyzer = RetryAnalyzer.class, description = "add multiple items to cart, search by item name, add to cart, check if all items are displayed in cart, check price")
+    @Test(groups = {"smoke"}, retryAnalyzer = RetryAnalyzer.class,
+            description = "add multiple items to cart, search by item name, add to cart, check if all items are displayed in cart, check price")
     public void fullUserFlowFromAddProductToCheckoutTest() {
         shoppingCartSteps
                 .openPage()
