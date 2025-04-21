@@ -30,11 +30,12 @@ public class ShoppingCartSteps extends BaseSteps {
     }
 
     @Step("add product to cart and check product name")
-    public ShoppingCartSteps addProductToCartAndCheckProductName(Gender gender, String locatorLabel, String menuLabel, String mySize) {
+    public ShoppingCartSteps addProductToCartAndCheckProductName(Gender gender, String locatorLabel, String menuLabel, String filterLabel, String mySize) {
         headerPage
                 .chooseGender(gender)
                 .goToHoverMenu(locatorLabel, menuLabel)
                 .isPageLoaded()
+                .filter(filterLabel, mySize)
                 .goToProductRandom(1)
                 .chooseSize(mySize);
         String actualName = productPage.getProductName();

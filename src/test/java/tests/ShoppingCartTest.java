@@ -10,15 +10,16 @@ public class ShoppingCartTest extends BaseTest {
     public void addProductToShoppingCartTest() {
         shoppingCartSteps
                 .openPage()
-                .addProductToCartAndCheckProductName(Gender.MEN,"Обувь", "Ботинки", "42");
+                .addProductToCartAndCheckProductName(Gender.MEN,"Обувь", "Ботинки", "Размер", "38");
     }
 
     @Test(groups = {"smoke"}, retryAnalyzer = RetryAnalyzer.class, description = "Check that the cart page shows the added quantity of goods")
     public void displayTheNumberOfGoodsOnCartAddTest() {
         shoppingCartSteps
                 .openPage()
-                .chooseGenderAndOpenProductsList(Gender.MEN,"Обувь", "Ботинки")
-                .addProductsToCart("42", 3)
+                .chooseGenderAndOpenProductsList(Gender.WOMEN,"Обувь", "Ботинки")
+                .filter("Размер", "38")
+                .addProductsToCart("38", 3)
                 .goToShoppingCart()
                 .checkQuantityOfAddedProducts(3);
     }
