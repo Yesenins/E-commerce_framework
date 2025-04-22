@@ -5,5 +5,6 @@
         <suite-file path="RegistrationTestSuite.xml"/>
         <suite-file path="LoginTestSuite.xml"/>
         <suite-file path="ShoppingCartTestSuite.xml"/>
+        <suite-file path="SearchTestSuite.xml"/>
     </suite-files>
 </suite>
