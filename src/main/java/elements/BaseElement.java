@@ -9,7 +9,7 @@ import utils.WaitUtils;
 import java.time.Duration;
 @Data
 @Log4j2
-public class BaseElement {
+public abstract class BaseElement {
     protected String locator;
     protected String nameElement;
     WebDriver driver;
@@ -43,10 +43,6 @@ public class BaseElement {
 
     public WebElement getElementWithLabel(String label) {
         return driver.findElement(By.xpath(String.format(locator, label)));
-    }
-
-    public boolean isVisible() {
-        return getElement().isDisplayed();
     }
 
     public By getLocator() {

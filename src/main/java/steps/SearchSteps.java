@@ -7,6 +7,8 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import utils.WaitUtils;
+
 import java.util.List;
 @Log4j2
 public class SearchSteps extends BaseSteps {

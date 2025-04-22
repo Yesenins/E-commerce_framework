@@ -25,14 +25,14 @@ public class Input extends BaseElement {
     }
 
     public Input writeText(String label, String text) {
-        WaitUtils.waitForElementToBeVisible(driver, getLocatorWithLabel(label));
+        WaitUtils.waitForElementToBeClickable(driver, getLocatorWithLabel(label));
         log.info("Fill in the field: {} with the value: {}", nameElement, text);
         getElementWithLabel(label).sendKeys(text);
         return this;
     }
 
     public Input writeTextInSearchField(String text) {
-        WaitUtils.waitForElementToBeVisible(driver, getLocator());
+        WaitUtils.waitForElementToBeClickable(driver, getLocator());
         log.info("Fill in the field: {} with the value: {}", nameElement, text);
         getElement().clear();
         getElement().sendKeys(text);
