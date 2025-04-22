@@ -25,7 +25,6 @@ public class HomePage extends HeaderPage {
     @Override
     public HomePage isPageLoaded() {
         WaitUtils.waitForPageLoaded(driver);
-        WaitUtils.waitForElementToBeClickable(driver, searchField.getLocator());
         return this;
     }
 
