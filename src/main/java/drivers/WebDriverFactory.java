@@ -25,6 +25,9 @@ public class WebDriverFactory {
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--start-maximized", "disable-gpu", "--incognito");
         options.addArguments("--headless", "disable-gpu", "--incognito");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         return new ChromeDriver(options);
     }
 
